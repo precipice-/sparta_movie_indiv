@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Top Rated Movie Collection from TMDB</title>
+    <script src="./main.js"></script>
+  </head>
+  <body>
+    <header>
+        <h1>Top Rated Movie Collection</h1>
+    </header>
+    <form class="search" onsubmit="handleSearch(event)">
+        <label>영화 검색: </label>
+        <button type="submit" id="search-btn">검색</button><input type="text" id="search-input" placeholder="영화 제목을 검색해 보세요">
+        
+    </form>
+    <div id="movieInfo"></div>
+    <footer>
+
+    </footer>
+  </body>
+</html>
