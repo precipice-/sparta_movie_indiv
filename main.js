@@ -13,36 +13,52 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) => {
-    console.log(response);
-    const movies = response.results;
-    console.log(movies);
+    // console.log(response);
 
-    document.querySelector(".movie").remove();
-    movies.forEach((movie) => {
-      let template = `<div class="movie" id="${movie.id}">
+    const movies = response.results;
+    // console.log(movies);
+    drawMovieCard(movies);
+
+    let cards = document.getElementsByClassName("movie");
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].addEventListener("click", click);
+    }
+
+    const searchBtn = document.getElementById("search-btn");
+    let searchInput = document.querySelector("#search-input");
+    console.log(searchInput.value);
+    searchBtn.addEventListener("click", findMovie(movies, searchInput.value));
+  })
+  .catch((err) => console.error(err));
+
+function click(e) {
+  window.alert("id: " + this.id);
+}
+
+const drawMovieCard = (collectedMovies) => {
+  document.querySelector(".movie").remove();
+  collectedMovies.forEach((movie) => {
+    let template = `<div class="movie" id="${movie.id}">
                       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="" />
                       <h2 class="movieName">${movie.title}</h2>
                       <p class="overview">${movie.overview}</p>
                       <p class="movieRate">Rating: ${movie.vote_average}</p>                      
                     </div>`;
 
-      document
-        .querySelector("#card-wrap")
-        .insertAdjacentHTML("beforeend", template);
-    });
+    document
+      .querySelector("#card-wrap")
+      .insertAdjacentHTML("beforeend", template);
+  });
+};
 
-    // const moviename = document.createElement("div");
-    // const overview = document.createElement("div");
-    // const rating = document.createElement("div");
-    // moviename.textContent = movies[0].original_title;
-    // overview.textContent = movies[0].overview;
-    // rating.textContent = movies[0].vote_average;
-    // const movieInfo = document.getElementById("movieInfo");
-    // movieInfo.appendChild(moviename);
-    // movieInfo.appendChild(overview);
-    // movieInfo.appendChild(rating);
-  })
-  // .then((response) => console.log(response))
-  .catch((err) => console.error(err));
+// 영화 객체, 검색참 인풋 / 출력값 받아서 다시 그리기
+const findMovie = (object, keyword) => {
+  let searchResult = [];
 
-drawMovieCard = async () => {};
+  for (let x = 0; x < object.length; x++) {
+    if (object[x].title.includes(keyword)) {
+      searchResult.push(object[x]);
+    }
+  }
+  drawMovieCard(searchResult);
+};
