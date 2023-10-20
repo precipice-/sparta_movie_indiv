@@ -15,11 +15,6 @@ fetch(
     .then((response) => {
         movies = response.results;
         drawMovieCard(movies);
-
-        let cards = document.getElementsByClassName("movie");
-        for (let i = 0; i < cards.length; i++) {
-            cards[i].addEventListener("click", onClickMovieCard);
-        }
     })
     .catch((err) => console.error(err));
 
@@ -51,6 +46,11 @@ const drawMovieCard = (collectedMovies) => {
 
         cardWrapDiv.insertAdjacentHTML("beforeend", template);
     });
+
+    let cards = document.getElementsByClassName("movie");
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].addEventListener("click", onClickMovieCard);
+    }
 };
 
 // 영화 객체, 검색참 인풋 / 출력값 받아서 다시 그리기
