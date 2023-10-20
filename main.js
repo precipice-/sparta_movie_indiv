@@ -15,7 +15,7 @@ fetch(
   .then((response) => {
     // console.log(response);
 
-    const movies = response.results;
+    movies = response.results;
     // console.log(movies);
     drawMovieCard(movies);
 
@@ -23,13 +23,18 @@ fetch(
     for (let i = 0; i < cards.length; i++) {
       cards[i].addEventListener("click", click);
     }
-
-    const searchBtn = document.getElementById("search-btn");
-    let searchInput = document.querySelector("#search-input");
-    console.log(searchInput.value);
-    searchBtn.addEventListener("click", findMovie(movies, searchInput.value));
   })
   .catch((err) => console.error(err));
+
+let movies;
+let searchInput;
+const searchBtn = document.getElementById("search-btn");
+searchBtn.addEventListener("click", () => {
+        searchInput = document.querySelector("#search-input");
+        console.log(searchInput);
+        findMovie(movies, searchInput.value);
+    });
+
 
 function click(e) {
   window.alert("id: " + this.id);
