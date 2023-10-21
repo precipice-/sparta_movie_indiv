@@ -26,8 +26,8 @@ searchBtn.addEventListener("click", () => {
     findMovie(movies, searchInput.value);
 });
 
-function onClickMovieCard(e) {
-    window.alert("id: " + this.id);
+function onClickMovieCard(id) {
+    window.alert(`id: ${id}`);
 }
 
 const cardWrapDiv = document.getElementById("card-wrap");
@@ -37,20 +37,55 @@ const drawMovieCard = (collectedMovies) => {
         cardWrapDiv.children[0].remove();
     }
     collectedMovies.forEach((movie) => {
-        let template = `<div class="movie" id="${movie.id}">
+        let div = document.createElement('div');
+        div.classList.add('movie');
+
+        let img = document.createElement('img');
+        img.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+        let h2 = document.createElement('h2');
+        h2.classList.add('movieName');
+        h2.appendChild((() => {
+            return document.createTextNode(movie.title);
+        })());
+
+        let p1 = document.createElement('p');
+        p1.classList.add('overview');
+        p1.appendChild((() => {
+            return document.createTextNode(movie.overview);
+        })());
+
+        let p2 = document.createElement('p');
+        p2.classList.add('movieRate');
+        p2.appendChild((() => {
+            return document.createTextNode(`Rating: ${movie.vote_average}`);
+        })());
+
+        div.appendChild(img);
+        div.appendChild(h2);
+        div.appendChild(p1);
+        div.appendChild(p2);
+
+        div.addEventListener('click', () => {
+            onClickMovieCard(movie.id);
+        })
+
+        cardWrapDiv.appendChild(div);
+
+        /*let template = `<div class="movie" id="${movie.id}">
                       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="" />
                       <h2 class="movieName">${movie.title}</h2>
                       <p class="overview">${movie.overview}</p>
                       <p class="movieRate">Rating: ${movie.vote_average}</p>                      
                     </div>`;
 
-        cardWrapDiv.insertAdjacentHTML("beforeend", template);
+        cardWrapDiv.insertAdjacentHTML("beforeend", template);*/
     });
 
-    let cards = document.getElementsByClassName("movie");
+    /*let cards = document.getElementsByClassName("movie");
     for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", onClickMovieCard);
-    }
+    }*/
 };
 
 // 영화 객체, 검색참 인풋 / 출력값 받아서 다시 그리기
