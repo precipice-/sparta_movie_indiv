@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css">
-    <title>Top Rated Movie Collection from TMDB</title>
-
-  </head>
-  <body>
-    <header>
-        <h1>Top Rated Movie Collection</h1>
-    </header>
-    <div class="search" onsubmit="findMovie(event)">
-        <label>Movie Search: </label>
-        <input type="text" id="search-input" placeholder="Search the movie title"> <button type="submit" id="search-btn">Search</button>
-        
-    </div>
-    <div class="cards-list" id="card-wrap">
-        <div class="movie" >
-            <img src="" alt=""/>
-            <h2 class="movieName"> Title </h2>
-            <p class="overview"> </p>
-            <p class="movieRate">  </p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Top Rated Movie Collection from TMDB</title>
+    </head>
+    <body>
+        <header>
+            <h1>Top Rated Movie Collection</h1>
+        </header>
+        <div class="search" onsubmit="findMovie(event)">
+            <label>Movie Search: </label>
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search the movie title"
+            />
+            <button type="submit" id="search-btn">Search</button>
         </div>
-    </div>
-  </body>
-  <script src="./main.js"></script>
+        <div class="cards-list" id="card-wrap">
+            <div class="movie">
+                <img src="" alt="" />
+                <h2 class="movieName">Title</h2>
+                <p class="overview"></p>
+                <p class="movieRate"></p>
+            </div>
+        </div>
+    </body>
+    <script src="./main.js"></script>
 </html>
